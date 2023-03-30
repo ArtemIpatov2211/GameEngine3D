@@ -1,6 +1,10 @@
 #pragma once
+#include <memory>
+
 namespace GameEngine
 {
+class CWindow;
+
 class CApplication
 {
 public:
@@ -15,5 +19,8 @@ public:
   virtual int start(unsigned int windowWidth, unsigned int windowHeight, const char* title);
 
   virtual void on_update() {}
+
+private:
+  std::unique_ptr<CWindow> m_pWindow;
 };
 }
