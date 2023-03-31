@@ -34,6 +34,7 @@ namespace GameEngine
     void shutdown();
   private:
     GLFWwindow* m_pWindow{ nullptr };
-    WindowData m_data;
+    WindowData m_data; 
+    float m_backgroundColor[4] = { 0.33f, 0.33f, 0.33f, 0.f };
   };
 }

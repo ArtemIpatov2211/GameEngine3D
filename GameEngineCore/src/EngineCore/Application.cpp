@@ -23,19 +23,16 @@ int CApplication::start(unsigned int windowWidth, unsigned int windowHeight, con
   m_eventDispatcher.add_event_listener<SEventMouseMoved>(
     [](SEventMouseMoved& event)
     {
-      LOG_INFO("[MouseMoved] Mouse moved to {0}x{1}", event.x, event.y);
     });
 
   m_eventDispatcher.add_event_listener<SEventWindowResize>(
     [](SEventWindowResize& event)
     {
-      LOG_INFO("[Resize] Resize to {0}x{1}", event.m_width, event.m_height);
     });
 
   m_eventDispatcher.add_event_listener<SEventWindowClose>(
     [&](SEventWindowClose& event)
     {
-      LOG_INFO("[WindowClose]");
       m_bCloseWindow = true;
     });
   m_pWindow->setEventCallback(
