@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include "EngineCore/Event.hpp"
+#include <functional>
 
 struct GLFWwindow;
 namespace GameEngine
@@ -7,6 +9,7 @@ namespace GameEngine
   class CWindow
   {
   public:
+    using EventCallbackFn = std::function<void(SBaseEvent&)>;
     CWindow(std::string title, const unsigned int width, const unsigned int height);
     ~CWindow();
 
@@ -16,15 +19,21 @@ namespace GameEngine
     CWindow& operator=(CWindow&&) = delete;
 
     virtual void on_update();
-    unsigned int getWidth() const { return m_width; }
-    unsigned int getHeight() const { return m_height; }
+    unsigned int getWidth() const { return m_data.m_width; }
+    unsigned int getHeight() const { return m_data.m_height; }
+    void setEventCallback(const EventCallbackFn& callback) { m_data.m_eventCallbackFn = callback; }
   private:
+    struct WindowData
+    {
+      std::string m_title;
+      unsigned int m_width;
+      unsigned int m_height;
+      EventCallbackFn m_eventCallbackFn;
+    };
     int init();
     void shutdown();
   private:
     GLFWwindow* m_pWindow{ nullptr };
-    std::string m_title;
-    unsigned int m_width{ 320 };
-    unsigned int m_height{ 320 };
+    WindowData m_data;
   };
 }

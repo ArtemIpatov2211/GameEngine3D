@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "EngineCore/Event.hpp"
 
 namespace GameEngine
 {
@@ -22,5 +23,7 @@ public:
 
 private:
   std::unique_ptr<CWindow> m_pWindow;
+  SEventDispatcher m_eventDispatcher;
+  bool m_bCloseWindow = false;
 };
 }
